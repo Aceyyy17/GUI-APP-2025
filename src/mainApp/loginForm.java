@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import user.userDashBoard;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,13 +31,22 @@ public class loginForm extends javax.swing.JFrame {
         initComponents();
     }
     
+    static String status;
+    static String type;
+    
     public static boolean loginAcc(String username, String password){
-        
         dbConnector connector = new dbConnector();
+        
         try{
             String query = "SELECT * FROM  tbl_user WHERE u_username =   '" + username + "'   AND u_password = '" + password + "'";
             ResultSet resultSet = connector.getData(query);
-            return resultSet.next();
+            if(resultSet.next()){
+                status = resultSet.getString("u_status");
+                type = resultSet.getString("u_type");
+                return true;
+            }else{ 
+                return false;
+            }
         }catch (SQLException ex){
             return false;
         }
@@ -245,13 +255,24 @@ public class loginForm extends javax.swing.JFrame {
     private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
 
         if(loginAcc(user.getText(), pass.getText())){
-        JOptionPane.showMessageDialog(null," Login Success!");
-        
-        adminDashBoard adb = new adminDashBoard();
-        adb.setVisible(true);
-        this.dispose();
+                if(!status.equals("Active")){
+                         JOptionPane.showMessageDialog(null,"Inactive account, please contact the admin!");
+                }else{
+                 if(type.equals("Admin")){
+                       JOptionPane.showMessageDialog(null," Login Success!");
+                      adminDashBoard adb = new adminDashBoard();
+                      adb.setVisible(true);
+                      this.dispose();    
+                      }else if (type.equals("User")){
+                     userDashBoard udb = new userDashBoard();
+                     udb.setVisible(true);
+                     this.dispose();
+                 }else{
+                      JOptionPane.showMessageDialog(null,"No account type found, please contact the admin!");
+                      }
+                }
         }else{
-        JOptionPane.showMessageDialog(null," Login Failed!");
+        JOptionPane.showMessageDialog(null," Invalid Account!");
         }
       
     }//GEN-LAST:event_loginMouseClicked

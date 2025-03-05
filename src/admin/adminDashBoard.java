@@ -95,6 +95,9 @@ public class adminDashBoard extends javax.swing.JFrame {
         manageUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         manageUser.setPreferredSize(new java.awt.Dimension(160, 160));
         manageUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageUserMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageUserMouseEntered(evt);
             }
@@ -161,7 +164,7 @@ public class adminDashBoard extends javax.swing.JFrame {
         jPanel10.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 20));
 
         jPanel9.add(jPanel10);
-        jPanel10.setBounds(480, 0, 140, 160);
+        jPanel10.setBounds(500, 0, 140, 160);
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("ADMIN DASHBOARD");
@@ -271,6 +274,12 @@ public class adminDashBoard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_closeMouseClicked
 
+    private void manageUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUserMouseClicked
+       usersForm uf = new usersForm();
+       uf.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_manageUserMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -309,16 +318,9 @@ public class adminDashBoard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel close;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -328,33 +330,12 @@ public class adminDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel manageUser;
     private javax.swing.JLabel minimize;
     private javax.swing.JPanel reports;
-    private javax.swing.JPanel settings;
-    private javax.swing.JPanel settings1;
-    private javax.swing.JPanel settings2;
-    private javax.swing.JPanel settings3;
-    private javax.swing.JPanel settings4;
-    private javax.swing.JPanel settings5;
-    private javax.swing.JPanel settings6;
     private javax.swing.JPanel settting;
     // End of variables declaration//GEN-END:variables
 }
