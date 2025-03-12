@@ -5,9 +5,10 @@
  */
 package mainApp;
 
-import internalPages.userPage;
+import user.userPage;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import user.userDashBoard;
 
 /**
  *
@@ -43,8 +44,7 @@ public class patientForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        minimize = new javax.swing.JLabel();
-        close = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         add = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         p_id = new javax.swing.JTextField();
@@ -83,33 +83,16 @@ public class patientForm extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
         jLabel1.setBounds(20, 10, 170, 31);
 
-        minimize.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        minimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        minimize.setText("—");
-        minimize.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("BACK");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minimizeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                minimizeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                minimizeMouseExited(evt);
+                jLabel4MouseClicked(evt);
             }
         });
-        jPanel2.add(minimize);
-        minimize.setBounds(630, 0, 40, 40);
-
-        close.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        close.setText("X");
-        close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeMouseClicked(evt);
-            }
-        });
-        jPanel2.add(close);
-        close.setBounds(660, 0, 40, 40);
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(630, 0, 70, 50);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 50));
 
@@ -322,29 +305,15 @@ public class patientForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_p_emailActionPerformed
 
-    private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        setState(ICONIFIED);
-    }//GEN-LAST:event_minimizeMouseClicked
-
-    private void minimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseEntered
-
-    }//GEN-LAST:event_minimizeMouseEntered
-
-    private void minimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_minimizeMouseExited
-
-    private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        this.dispose();
-        dashBoard dash = new dashBoard();
-        dash.setVisible(true);
-        userPage up = new userPage();
-        dash.maindesktop.add(up).setVisible(true);
-    }//GEN-LAST:event_closeMouseClicked
-
     private void p_pnumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_pnumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_p_pnumberActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        userDashBoard udb = new userDashBoard();
+        udb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -383,7 +352,6 @@ public class patientForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel add;
-    private javax.swing.JLabel close;
     public javax.swing.JRadioButton female;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -392,6 +360,7 @@ public class patientForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -399,7 +368,6 @@ public class patientForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JRadioButton male;
-    private javax.swing.JLabel minimize;
     public javax.swing.JTextField p_address;
     public javax.swing.JTextField p_age;
     public javax.swing.JTextField p_email;

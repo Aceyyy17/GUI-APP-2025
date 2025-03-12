@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package internalPages;
+package user;
 
 import config.dbConnector;
 import java.awt.Color;

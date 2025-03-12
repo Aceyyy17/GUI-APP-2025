@@ -5,6 +5,7 @@
  */
 package admin;
 
+import config.Session;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -50,17 +51,19 @@ public class adminDashBoard extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
+        acc_name = new javax.swing.JLabel();
+        acc_lname = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        minimize = new javax.swing.JLabel();
-        close = new javax.swing.JLabel();
+        LOGOUT = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel8.setBackground(new java.awt.Color(102, 102, 255));
@@ -156,68 +159,41 @@ public class adminDashBoard extends javax.swing.JFrame {
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/internalPages/user.png"))); // NOI18N
-        jPanel10.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 120));
+        jPanel10.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 120, 120));
 
-        jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel23.setText("ADMIN");
-        jPanel10.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 20));
+        acc_name.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        acc_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_name.setText("ADMIN");
+        jPanel10.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
+
+        acc_lname.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        acc_lname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_lname.setText("ADMIN");
+        jPanel10.add(acc_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 20));
 
         jPanel9.add(jPanel10);
-        jPanel10.setBounds(500, 0, 140, 160);
+        jPanel10.setBounds(440, 0, 140, 160);
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("ADMIN DASHBOARD");
         jPanel9.add(jLabel1);
-        jLabel1.setBounds(30, 20, 240, 31);
+        jLabel1.setBounds(30, 60, 240, 31);
 
-        jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel24.setText("ADDRESS:");
-        jPanel9.add(jLabel24);
-        jLabel24.setBounds(30, 120, 230, 20);
-
-        jLabel25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel25.setText("ACCOUNT NAME:");
-        jPanel9.add(jLabel25);
-        jLabel25.setBounds(30, 60, 230, 20);
-
-        jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel26.setText("POSITION:");
-        jPanel9.add(jLabel26);
-        jLabel26.setBounds(30, 80, 230, 20);
-
-        jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel27.setText("EMAIL:");
-        jPanel9.add(jLabel27);
-        jLabel27.setBounds(30, 100, 230, 20);
-
-        minimize.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        minimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        minimize.setText("—");
-        minimize.addMouseListener(new java.awt.event.MouseAdapter() {
+        LOGOUT.setBackground(new java.awt.Color(0, 153, 204));
+        LOGOUT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minimizeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                minimizeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                minimizeMouseExited(evt);
+                LOGOUTMouseClicked(evt);
             }
         });
-        jPanel9.add(minimize);
-        minimize.setBounds(650, 10, 18, 22);
+        LOGOUT.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        close.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        close.setText("X");
-        close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeMouseClicked(evt);
-            }
-        });
-        jPanel9.add(close);
-        close.setBounds(680, 10, 12, 22);
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("LOG OUT");
+        LOGOUT.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 100, 30));
+
+        jPanel9.add(LOGOUT);
+        LOGOUT.setBounds(590, 10, 100, 30);
 
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 160));
 
@@ -255,30 +231,33 @@ public class adminDashBoard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_setttingMouseClicked
 
-    private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        setState(ICONIFIED);
-    }//GEN-LAST:event_minimizeMouseClicked
-
-    private void minimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseEntered
-
-    }//GEN-LAST:event_minimizeMouseEntered
-
-    private void minimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_minimizeMouseExited
-
-    private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        int a = JOptionPane.showConfirmDialog(null, "Do you want to Exit?");
-        if (a == JOptionPane. YES_OPTION){
-            System.exit(0);
-        }
-    }//GEN-LAST:event_closeMouseClicked
-
     private void manageUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUserMouseClicked
        usersForm uf = new usersForm();
        uf.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_manageUserMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        Session ses = Session.getInstance(); 
+        if(ses.getUid() == 0){
+            JOptionPane.showMessageDialog(null, "No account, login first!");
+            loginForm lf = new loginForm();
+            lf.setVisible(true);
+            this.dispose(); 
+        }else{
+             acc_name.setText(""+ses.getFname());
+             acc_lname.setText(""+ses.getLname());
+        }
+        
+       
+    }//GEN-LAST:event_formWindowActivated
+
+    private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
+
+        loginForm lf = new loginForm();
+        lf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LOGOUTMouseClicked
 
     /**
      * @param args the command line arguments
@@ -316,25 +295,22 @@ public class adminDashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel close;
+    private javax.swing.JPanel LOGOUT;
+    private javax.swing.JLabel acc_lname;
+    private javax.swing.JLabel acc_name;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel manageUser;
-    private javax.swing.JLabel minimize;
     private javax.swing.JPanel reports;
     private javax.swing.JPanel settting;
     // End of variables declaration//GEN-END:variables

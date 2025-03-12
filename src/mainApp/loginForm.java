@@ -1,6 +1,7 @@
 package mainApp;
 
 import admin.adminDashBoard;
+import config.Session;
 import config.dbConnector;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -41,11 +42,20 @@ public class loginForm extends javax.swing.JFrame {
             String query = "SELECT * FROM  tbl_user WHERE u_username =   '" + username + "'   AND u_password = '" + password + "'";
             ResultSet resultSet = connector.getData(query);
             if(resultSet.next()){
+                
                 status = resultSet.getString("u_status");
                 type = resultSet.getString("u_type");
-                return true;
+                Session ses = Session.getInstance();
+                    ses.setUid(resultSet.getInt("u_id"));
+                    ses.setFname(resultSet.getString("u_fname"));
+                    ses.setLname(resultSet.getString("u_lname"));
+                    ses.setEmail(resultSet.getString("u_email"));
+                    ses.setUsername(resultSet.getString("u_username"));
+                    ses.setType(resultSet.getString("u_type"));
+                    ses.setStatus(resultSet.getString("u_status"));
+                return true;    
             }else{ 
-                return false;
+                return false;  
             }
         }catch (SQLException ex){
             return false;
@@ -256,16 +266,17 @@ public class loginForm extends javax.swing.JFrame {
 
         if(loginAcc(user.getText(), pass.getText())){
                 if(!status.equals("Active")){
-                         JOptionPane.showMessageDialog(null,"Inactive account, please contact the admin!");
+                        JOptionPane.showMessageDialog(null,"Inactive account, please contact the admin!");
                 }else{
                  if(type.equals("Admin")){
                        JOptionPane.showMessageDialog(null," Login Success!");
-                      adminDashBoard adb = new adminDashBoard();
-                      adb.setVisible(true);
+                        adminDashBoard adb = new adminDashBoard();
+                        adb.setVisible(true);
                       this.dispose();    
                       }else if (type.equals("User")){
-                     userDashBoard udb = new userDashBoard();
-                     udb.setVisible(true);
+                     JOptionPane.showMessageDialog(null," Login Success!");
+                        userDashBoard udb = new userDashBoard();
+                        udb.setVisible(true);
                      this.dispose();
                  }else{
                       JOptionPane.showMessageDialog(null,"No account type found, please contact the admin!");

@@ -5,6 +5,13 @@
  */
 package user;
 
+
+import config.Session;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import mainApp.loginForm;
+import mainApp.patientForm;
+
 /**
  *
  * @author PC11
@@ -17,6 +24,10 @@ public class userDashBoard extends javax.swing.JFrame {
     public userDashBoard() {
         initComponents();
     }
+    
+    Color navColor = new Color(153,153,255);
+    Color headerColor = new Color(255,102,0);
+    Color bodyColor = new Color(0,153,204);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,37 +38,234 @@ public class userDashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        reports = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        managePatient = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        settting = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        acc_lname = new javax.swing.JLabel();
+        acc_name = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        LOGOUT = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
-        jPanel1.setBackground(new java.awt.Color(255, 51, 0));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel8.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        reports.setBackground(new java.awt.Color(255, 102, 0));
+        reports.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        reports.setPreferredSize(new java.awt.Dimension(160, 160));
+        reports.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                reportsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                reportsMouseExited(evt);
+            }
+        });
+        reports.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC11\\Pictures\\reports.png")); // NOI18N
+        reports.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 100));
+
+        jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("REPORTS");
+        reports.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
+
+        jPanel8.add(reports, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 140, 140));
+
+        managePatient.setBackground(new java.awt.Color(255, 102, 0));
+        managePatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        managePatient.setPreferredSize(new java.awt.Dimension(160, 160));
+        managePatient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                managePatientMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                managePatientMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                managePatientMouseExited(evt);
+            }
+        });
+        managePatient.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("MANAGE PATIENT");
+        managePatient.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
+
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/internalPages/manage-user.png"))); // NOI18N
+        managePatient.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 90));
+
+        jPanel8.add(managePatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 140, 140));
+
+        settting.setBackground(new java.awt.Color(255, 102, 0));
+        settting.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        settting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                setttingMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                setttingMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                setttingMouseExited(evt);
+            }
+        });
+        settting.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/setting.png"))); // NOI18N
+        settting.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, -1));
+
+        jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("SETTINGS");
+        settting.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
+
+        jPanel8.add(settting, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 140, 140));
+
+        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 700, 240));
+
+        jPanel9.setBackground(new java.awt.Color(0, 153, 204));
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel9.setLayout(null);
+
+        jPanel10.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/internalPages/user.png"))); // NOI18N
+        jPanel10.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 120, 120));
+
+        acc_lname.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        acc_lname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_lname.setText("USER");
+        jPanel10.add(acc_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 20));
+
+        acc_name.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        acc_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_name.setText("USER");
+        jPanel10.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
+
+        jPanel9.add(jPanel10);
+        jPanel10.setBounds(440, 0, 140, 160);
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("USER DASHBOARD");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 2, -1, 120));
+        jPanel9.add(jLabel1);
+        jLabel1.setBounds(30, 60, 240, 31);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 340, 120));
+        LOGOUT.setBackground(new java.awt.Color(0, 153, 204));
+        LOGOUT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LOGOUTMouseClicked(evt);
+            }
+        });
+        LOGOUT.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("LOG OUT");
+        LOGOUT.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 100, 30));
+
+        jPanel9.add(LOGOUT);
+        LOGOUT.setBounds(590, 10, 100, 30);
+
+        jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void reportsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseEntered
+        reports.setBackground(navColor);
+    }//GEN-LAST:event_reportsMouseEntered
+
+    private void reportsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseExited
+        reports.setBackground(headerColor);
+    }//GEN-LAST:event_reportsMouseExited
+
+    private void managePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePatientMouseClicked
+       patientForm pf = new patientForm();
+        pf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_managePatientMouseClicked
+
+    private void managePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePatientMouseEntered
+        managePatient.setBackground(navColor);
+    }//GEN-LAST:event_managePatientMouseEntered
+
+    private void managePatientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePatientMouseExited
+        managePatient.setBackground(headerColor);
+    }//GEN-LAST:event_managePatientMouseExited
+
+    private void setttingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseClicked
+     
+    }//GEN-LAST:event_setttingMouseClicked
+
+    private void setttingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseEntered
+        settting.setBackground(navColor);
+    }//GEN-LAST:event_setttingMouseEntered
+
+    private void setttingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseExited
+        settting.setBackground(headerColor);
+    }//GEN-LAST:event_setttingMouseExited
+
+    private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
+        loginForm lf = new loginForm();
+        lf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LOGOUTMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        Session ses = Session.getInstance();
+        if(ses.getUid() == 0){
+            JOptionPane.showMessageDialog(null, "No account, login first!");
+            loginForm lf = new loginForm();
+            lf.setVisible(true);
+            this.dispose(); 
+        }else{
+             acc_name.setText(""+ses.getFname());
+             acc_lname.setText(""+ses.getLname());
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -95,8 +303,24 @@ public class userDashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel LOGOUT;
+    private javax.swing.JLabel acc_lname;
+    private javax.swing.JLabel acc_name;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel managePatient;
+    private javax.swing.JPanel reports;
+    private javax.swing.JPanel settting;
     // End of variables declaration//GEN-END:variables
 }
