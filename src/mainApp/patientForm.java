@@ -27,8 +27,8 @@ public class patientForm extends javax.swing.JFrame {
     }
     
     Color navColor = new Color(153,153,255);
-    Color headerColor = new Color(255,102,0);
-    Color bodyColor = new Color(0,153,204);
+    Color headerColor = new Color(153,153,255);
+    Color bodyColor = new Color(102,102,255);
     
     public String gender;
 
@@ -44,8 +44,9 @@ public class patientForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        back = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        add = new javax.swing.JPanel();
+        save = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         p_id = new javax.swing.JTextField();
         p_age = new javax.swing.JTextField();
@@ -83,37 +84,59 @@ public class patientForm extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
         jLabel1.setBounds(20, 10, 170, 31);
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        back.setBackground(new java.awt.Color(153, 153, 255));
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backMouseExited(evt);
+            }
+        });
+        back.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("BACK");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
         });
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(630, 0, 70, 50);
+        back.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
+
+        jPanel2.add(back);
+        back.setBounds(600, 10, 90, 30);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 50));
 
-        add.setBackground(new java.awt.Color(153, 153, 255));
-        add.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        add.addMouseListener(new java.awt.event.MouseAdapter() {
+        save.setBackground(new java.awt.Color(153, 153, 255));
+        save.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addMouseEntered(evt);
+                saveMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                addMouseExited(evt);
+                saveMouseExited(evt);
             }
         });
-        add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        save.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("SAVE");
-        add.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 40));
+        save.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 40));
 
-        jPanel1.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 90, 40));
+        jPanel1.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, 90, 40));
 
         p_id.setBackground(new java.awt.Color(255, 102, 0));
         p_id.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -269,13 +292,13 @@ public class patientForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
-        add.setBackground(bodyColor);
-    }//GEN-LAST:event_addMouseEntered
+    private void saveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseEntered
+        save.setBackground(bodyColor);
+    }//GEN-LAST:event_saveMouseEntered
 
-    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
-        add.setBackground(headerColor);
-    }//GEN-LAST:event_addMouseExited
+    private void saveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseExited
+        save.setBackground(headerColor);
+    }//GEN-LAST:event_saveMouseExited
 
     private void p_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p_idActionPerformed
         // TODO add your handling code here:
@@ -310,10 +333,30 @@ public class patientForm extends javax.swing.JFrame {
     }//GEN-LAST:event_p_pnumberActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        userDashBoard udb = new userDashBoard();
-        udb.setVisible(true);
+        userPage up = new userPage();
+        up.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void backMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseEntered
+      
+    }//GEN-LAST:event_backMouseEntered
+
+    private void backMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseExited
+        
+    }//GEN-LAST:event_backMouseExited
+
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+        
+    }//GEN-LAST:event_backMouseClicked
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+       back.setBackground(bodyColor);
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+       back.setBackground(headerColor);
+    }//GEN-LAST:event_jLabel4MouseExited
 
     /**
      * @param args the command line arguments
@@ -351,7 +394,7 @@ public class patientForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel add;
+    private javax.swing.JPanel back;
     public javax.swing.JRadioButton female;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -376,5 +419,6 @@ public class patientForm extends javax.swing.JFrame {
     public javax.swing.JTextField p_lname;
     public javax.swing.JTextField p_pnumber;
     public javax.swing.JComboBox<String> p_status;
+    private javax.swing.JPanel save;
     // End of variables declaration//GEN-END:variables
 }

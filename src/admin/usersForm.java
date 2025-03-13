@@ -43,9 +43,9 @@ public class usersForm extends javax.swing.JFrame {
 
     }
     
-    Color navColor = new Color(153,153,255);
-    Color headerColor = new Color(255,102,0);
-    Color bodyColor = new Color(0,153,204);
+    Color navColor = new Color(0,153,204);
+    Color HoverColor = new Color(153,153,255);
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,6 +62,8 @@ public class usersForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         acc_id = new javax.swing.JLabel();
+        add_button = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
@@ -87,12 +89,12 @@ public class usersForm extends javax.swing.JFrame {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/icons8-users-100.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 130));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 110));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("USERS");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -103,6 +105,29 @@ public class usersForm extends javax.swing.JFrame {
         acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_id.setText("ID: ");
         jPanel1.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 150, 30));
+
+        add_button.setBackground(new java.awt.Color(153, 153, 255));
+        add_button.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        add_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                add_buttonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                add_buttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                add_buttonMouseExited(evt);
+            }
+        });
+        add_button.setLayout(null);
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("ADD");
+        add_button.add(jLabel6);
+        jLabel6.setBounds(0, 14, 150, 20);
+
+        jPanel1.add(add_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 150, 50));
 
         jPanel8.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 340));
 
@@ -158,6 +183,20 @@ public class usersForm extends javax.swing.JFrame {
        acc_id.setText(""+ses.getUid());
     }//GEN-LAST:event_formWindowActivated
 
+    private void add_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_buttonMouseEntered
+     add_button.setBackground(navColor);
+    }//GEN-LAST:event_add_buttonMouseEntered
+
+    private void add_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_buttonMouseExited
+       add_button.setBackground(HoverColor);
+    }//GEN-LAST:event_add_buttonMouseExited
+
+    private void add_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_buttonMouseClicked
+        addUserForm auf = new addUserForm();
+        auf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_add_buttonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -196,11 +235,13 @@ public class usersForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_id;
+    private javax.swing.JPanel add_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
