@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableModel;
 import mainApp.*;
 import net.proteanit.sql.DbUtils;
 
@@ -64,6 +65,8 @@ public class usersForm extends javax.swing.JFrame {
         acc_id = new javax.swing.JLabel();
         add_button = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        edit_button = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
@@ -99,7 +102,7 @@ public class usersForm extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("CURRENT USER:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 280, 150, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 150, 30));
 
         acc_id.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -128,6 +131,29 @@ public class usersForm extends javax.swing.JFrame {
         jLabel6.setBounds(0, 14, 150, 20);
 
         jPanel1.add(add_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 150, 50));
+
+        edit_button.setBackground(new java.awt.Color(153, 153, 255));
+        edit_button.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        edit_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                edit_buttonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                edit_buttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                edit_buttonMouseExited(evt);
+            }
+        });
+        edit_button.setLayout(null);
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("EDIT");
+        edit_button.add(jLabel7);
+        jLabel7.setBounds(0, 14, 150, 20);
+
+        jPanel1.add(edit_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 150, 50));
 
         jPanel8.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 340));
 
@@ -197,6 +223,47 @@ public class usersForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_add_buttonMouseClicked
 
+    private void edit_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edit_buttonMouseClicked
+        int rowIndex = usersTable.getSelectedRow(); 
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please Select an Item!");
+            
+        }else{
+            try{  
+                
+               dbConnector dbc = new dbConnector();
+               TableModel tbl = usersTable.getModel();
+               ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE u_id = '"+tbl. getValueAt(rowIndex, 0)+"'");
+               if(rs.next()){
+                   
+                addUserForm auf = new addUserForm(); 
+                auf.fn.setText(""+rs.getString("u_fname"));
+                auf.setVisible(true);
+                this.dispose();
+                
+               } 
+             
+            
+        }catch(SQLException ex){
+            
+                System.out.println(""+ex);
+        }
+            }
+        
+        
+        
+        
+    }//GEN-LAST:event_edit_buttonMouseClicked
+
+    private void edit_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edit_buttonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edit_buttonMouseEntered
+
+    private void edit_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edit_buttonMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edit_buttonMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -236,12 +303,14 @@ public class usersForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_id;
     private javax.swing.JPanel add_button;
+    private javax.swing.JPanel edit_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
