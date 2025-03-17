@@ -238,7 +238,16 @@ public class usersForm extends javax.swing.JFrame {
                if(rs.next()){
                    
                 addUserForm auf = new addUserForm(); 
+                auf.uid.setText(""+rs.getString("u_id"));
                 auf.fn.setText(""+rs.getString("u_fname"));
+                auf.ln.setText(""+rs.getString("u_lname"));
+                auf.eml.setText(""+rs.getString("u_email"));
+                auf.un.setText(""+rs.getString("u_username"));
+                auf.ps.setText(""+rs.getString("u_password"));
+                auf.ut.setSelectedItem(""+rs.getString("u_type"));
+                auf.ps.setText(""+rs.getString("u_status"));
+                auf.addUser.setEnabled(false);
+                auf.updateUser.setEnabled(true);
                 auf.setVisible(true);
                 this.dispose();
                 
@@ -257,11 +266,11 @@ public class usersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_edit_buttonMouseClicked
 
     private void edit_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edit_buttonMouseEntered
-        // TODO add your handling code here:
+       edit_button.setBackground(navColor);
     }//GEN-LAST:event_edit_buttonMouseEntered
 
     private void edit_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edit_buttonMouseExited
-        // TODO add your handling code here:
+       edit_button.setBackground(HoverColor);
     }//GEN-LAST:event_edit_buttonMouseExited
 
     /**
