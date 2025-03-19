@@ -1,10 +1,14 @@
 package mainApp;
 
 import config.dbConnector;
+import config.passwordHasher;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,9 +35,22 @@ public class registrationForm extends javax.swing.JFrame {
     
     public static String email, uname;
     
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    
     public boolean duplicateCheck(){
         
         dbConnector dbc = new dbConnector();
+        
+        if (!isValidEmail(eml.getText())) {
+            JOptionPane.showMessageDialog(null, "Invalid email format! Please enter a valid email.");
+            eml.setText("");
+            return true;
+        }
         
         try{
             String query = "SELECT * FROM  tbl_user WHERE u_username =   '" + un.getText() + "'  OR u_email = '" + eml.getText() + "'";
@@ -103,6 +120,8 @@ public class registrationForm extends javax.swing.JFrame {
         fn = new javax.swing.JTextField();
         ln = new javax.swing.JTextField();
         eml = new javax.swing.JTextField();
+        hide = new javax.swing.JLabel();
+        show = new javax.swing.JLabel();
         ps = new javax.swing.JPasswordField();
         cancel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -207,6 +226,22 @@ public class registrationForm extends javax.swing.JFrame {
         eml.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         eml.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         jPanel3.add(eml, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 300, 50));
+
+        hide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/hidden.png"))); // NOI18N
+        hide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                hideMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                hideMouseReleased(evt);
+            }
+        });
+        jPanel3.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 256, -1, -1));
+
+        show.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/eye.png"))); // NOI18N
+        jPanel3.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 256, -1, -1));
 
         ps.setBackground(new java.awt.Color(0, 153, 204));
         ps.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -349,8 +384,12 @@ public class registrationForm extends javax.swing.JFrame {
         }
         else{
            dbConnector dbc = new dbConnector();
+           
+           try{
+           String pass = passwordHasher.hashPassword(ps.getText());
+           
            if( dbc.insertData(" INSERT INTO tbl_user ( u_fname, u_lname, u_email, u_username, u_password, u_type, u_status) "
-                + "VALUES ('"+fn.getText()+"', '"+ln.getText()+"', '"+eml.getText()+"', '"+un.getText()+"', '"+ps.getText()+"', '"+ut.getSelectedItem()+"', 'Inactive') "))
+                + "VALUES ('"+fn.getText()+"', '"+ln.getText()+"', '"+eml.getText()+"', '"+un.getText()+"', '"+pass+"', '"+ut.getSelectedItem()+"', 'Pending') "))
          {
             JOptionPane.showMessageDialog(null, "Inserted Successfully!");
             loginForm lf = new loginForm();
@@ -359,6 +398,11 @@ public class registrationForm extends javax.swing.JFrame {
         } else{
           JOptionPane.showMessageDialog(null, "Connection Failed!");
         }  
+       }catch(NoSuchAlgorithmException ex)
+       {
+           System.out.println(""+ex);
+       }
+           
         }
 
         
@@ -367,6 +411,18 @@ public class registrationForm extends javax.swing.JFrame {
     private void utMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_utMouseClicked
        
     }//GEN-LAST:event_utMouseClicked
+
+    private void hideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMousePressed
+       show.setVisible(true);
+       hide.setVisible(false);
+       ps.setEchoChar((char) 0);
+    }//GEN-LAST:event_hideMousePressed
+
+    private void hideMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMouseReleased
+       show.setVisible(false);
+       hide.setVisible(true);
+       ps.setEchoChar('*');
+    }//GEN-LAST:event_hideMouseReleased
 
     /**
      * @param args the command line arguments
@@ -409,6 +465,7 @@ public class registrationForm extends javax.swing.JFrame {
     private javax.swing.JLabel close;
     private javax.swing.JTextField eml;
     private javax.swing.JTextField fn;
+    private javax.swing.JLabel hide;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -423,6 +480,7 @@ public class registrationForm extends javax.swing.JFrame {
     private javax.swing.JLabel minimize;
     private javax.swing.JPasswordField ps;
     private javax.swing.JPanel register;
+    private javax.swing.JLabel show;
     private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> ut;
     // End of variables declaration//GEN-END:variables

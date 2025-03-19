@@ -34,7 +34,7 @@ public class usersForm extends javax.swing.JFrame {
     public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT u_id, u_fname, u_lname, u_email, u_type FROM tbl_user");
+            ResultSet rs = dbc.getData("SELECT u_id, u_fname, u_lname, u_email, u_status FROM tbl_user");
             usersTable.setModel(DbUtils.resultSetToTableModel(rs));
              rs.close();
         }catch(SQLException ex){
@@ -206,7 +206,7 @@ public class usersForm extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        Session ses = Session.getInstance();
-       acc_id.setText(""+ses.getUid());
+       acc_id.setText("User ID: "+ses.getUid());
     }//GEN-LAST:event_formWindowActivated
 
     private void add_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_buttonMouseEntered
@@ -245,7 +245,7 @@ public class usersForm extends javax.swing.JFrame {
                 auf.un.setText(""+rs.getString("u_username"));
                 auf.ps.setText(""+rs.getString("u_password"));
                 auf.ut.setSelectedItem(""+rs.getString("u_type"));
-                auf.ps.setText(""+rs.getString("u_status"));
+                auf.us.setSelectedItem(""+rs.getString("u_status"));
                 auf.addUser.setEnabled(false);
                 auf.updateUser.setEnabled(true);
                 auf.setVisible(true);

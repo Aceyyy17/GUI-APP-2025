@@ -237,7 +237,9 @@ public class userDashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_managePatientMouseExited
 
     private void setttingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseClicked
-     
+     accountDetails accd = new accountDetails();
+     accd.setVisible(true);
+     this.dispose();
     }//GEN-LAST:event_setttingMouseClicked
 
     private void setttingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseEntered

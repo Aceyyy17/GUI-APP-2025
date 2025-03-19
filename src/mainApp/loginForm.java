@@ -3,8 +3,10 @@ package mainApp;
 import admin.adminDashBoard;
 import config.Session;
 import config.dbConnector;
+import config.passwordHasher;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.BorderFactory;
@@ -39,10 +41,15 @@ public class loginForm extends javax.swing.JFrame {
         dbConnector connector = new dbConnector();
         
         try{
-            String query = "SELECT * FROM  tbl_user WHERE u_username =   '" + username + "'   AND u_password = '" + password + "'";
+            String query = "SELECT * FROM  tbl_user WHERE u_username =   '" + username + "'";
             ResultSet resultSet = connector.getData(query);
             if(resultSet.next()){
                 
+                
+                String hashedPass = resultSet.getString("u_password");
+                String rehashedPass = passwordHasher.hashPassword(password);
+                
+                 if(hashedPass.equals(rehashedPass)){
                 status = resultSet.getString("u_status");
                 type = resultSet.getString("u_type");
                 Session ses = Session.getInstance();
@@ -54,10 +61,13 @@ public class loginForm extends javax.swing.JFrame {
                     ses.setType(resultSet.getString("u_type"));
                     ses.setStatus(resultSet.getString("u_status"));
                 return true;    
+                 }else{
+                 return false;
+                 } 
             }else{ 
                 return false;  
             }
-        }catch (SQLException ex){
+        }catch (SQLException | NoSuchAlgorithmException ex){
             return false;
         }
     }
@@ -96,6 +106,8 @@ public class loginForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         user = new javax.swing.JTextField();
+        hide = new javax.swing.JLabel();
+        show = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
         login = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -139,6 +151,22 @@ public class loginForm extends javax.swing.JFrame {
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         user.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "UserName", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
         jPanel3.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 320, 50));
+
+        hide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/hidden.png"))); // NOI18N
+        hide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                hideMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                hideMouseReleased(evt);
+            }
+        });
+        jPanel3.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, 20));
+
+        show.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/eye.png"))); // NOI18N
+        jPanel3.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, 20));
 
         pass.setBackground(new java.awt.Color(0, 153, 204));
         pass.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -320,6 +348,18 @@ public class loginForm extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_exitMouseClicked
 
+    private void hideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMousePressed
+        show.setVisible(true);
+        hide.setVisible(false);
+        pass.setEchoChar((char) 0);
+    }//GEN-LAST:event_hideMousePressed
+
+    private void hideMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMouseReleased
+        show.setVisible(false);
+        hide.setVisible(true);
+        pass.setEchoChar('*');
+    }//GEN-LAST:event_hideMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -358,6 +398,7 @@ public class loginForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel close;
     private javax.swing.JPanel exit;
+    private javax.swing.JLabel hide;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -371,6 +412,7 @@ public class loginForm extends javax.swing.JFrame {
     private javax.swing.JLabel logofront;
     private javax.swing.JLabel minimize;
     private javax.swing.JPasswordField pass;
+    private javax.swing.JLabel show;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

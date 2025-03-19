@@ -10,6 +10,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,12 +33,59 @@ public class addUserForm extends javax.swing.JFrame {
     
     public static String email, uname;
     
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    
     public boolean duplicateCheck(){
-        
         dbConnector dbc = new dbConnector();
+        
+        if (!isValidEmail(eml.getText())) {
+            JOptionPane.showMessageDialog(null, "Invalid email format! Please enter a valid email.");
+            eml.setText("");
+            return true;
+        }
         
         try{
             String query = "SELECT * FROM  tbl_user WHERE u_username =   '" + un.getText() + "'  OR u_email = '" + eml.getText() + "'";
+            ResultSet resultSet = dbc.getData(query);
+            
+            if(resultSet.next()){
+                 email = resultSet.getString("u_email");
+                 if(email.equals(eml.getText())){
+                 JOptionPane.showConfirmDialog(null, "Email is already used!");
+                 eml.setText("");
+                 }
+                 uname = resultSet.getString("u_username");
+                 if(uname.equals(un.getText())){
+                 JOptionPane.showConfirmDialog(null, "Username is already used!");
+                 un.setText("");
+                 }
+                 return true;
+            }else{
+                return false;
+        }
+            
+        }catch(SQLException ex){
+            System.out.println(""+ex);
+            return false;
+        }
+             
+    }
+
+    public boolean updateCheck(){
+        dbConnector dbc = new dbConnector();
+        
+        if (!isValidEmail(eml.getText())) {
+            JOptionPane.showMessageDialog(null, "Invalid email format! Please enter a valid email.");
+            eml.setText("");
+            return true;
+        }
+        try{
+            String query = "SELECT * FROM  tbl_user WHERE (u_username =   '" + un.getText() + "'  OR u_email = '" + eml.getText() + "') AND u_id != '"+uid.getText()+"'";
             ResultSet resultSet = dbc.getData(query);
             
             if(resultSet.next()){
@@ -63,8 +112,8 @@ public class addUserForm extends javax.swing.JFrame {
              
     }
     
-    Color hover = new Color(255,102,0);
-    Color defbutton = new Color(153,153,255);
+Color hover = new Color(255,102,0);
+Color defbutton = new Color(153,153,255);
     
     Border empty = BorderFactory.createEmptyBorder();
     
@@ -95,17 +144,19 @@ public class addUserForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         un = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         fn = new javax.swing.JTextField();
         ln = new javax.swing.JTextField();
         eml = new javax.swing.JTextField();
-        ps = new javax.swing.JPasswordField();
         ut = new javax.swing.JComboBox<>();
         us = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         uid = new javax.swing.JLabel();
         addUser = new javax.swing.JButton();
         updateUser = new javax.swing.JButton();
+        hide = new javax.swing.JLabel();
+        show = new javax.swing.JLabel();
+        ps = new javax.swing.JPasswordField();
+        userId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -138,7 +189,7 @@ public class addUserForm extends javax.swing.JFrame {
 
         un.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         un.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        un.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "UserName", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        un.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "UserName", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         un.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 unActionPerformed(evt);
@@ -146,14 +197,9 @@ public class addUserForm extends javax.swing.JFrame {
         });
         jPanel3.add(un, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 300, 50));
 
-        jLabel3.setFont(new java.awt.Font("Calisto MT", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("REGISTRATION FORM");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 270, 30));
-
         fn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         fn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fn.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        fn.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         fn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnActionPerformed(evt);
@@ -163,23 +209,18 @@ public class addUserForm extends javax.swing.JFrame {
 
         ln.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         ln.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ln.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        ln.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         jPanel3.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 300, 50));
 
         eml.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         eml.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        eml.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        eml.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         eml.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emlActionPerformed(evt);
             }
         });
         jPanel3.add(eml, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 300, 50));
-
-        ps.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        ps.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ps.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
-        jPanel3.add(ps, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 300, 50));
 
         ut.setBackground(new java.awt.Color(0, 153, 204));
         ut.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -217,7 +258,7 @@ public class addUserForm extends javax.swing.JFrame {
         uid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         uid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         uid.setText("ID: ");
-        jPanel3.add(uid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 60, 20));
+        jPanel3.add(uid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 30, 20));
 
         addUser.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         addUser.setText("ADD");
@@ -242,6 +283,37 @@ public class addUserForm extends javax.swing.JFrame {
             }
         });
         jPanel3.add(updateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, 30));
+
+        hide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/hidden.png"))); // NOI18N
+        hide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                hideMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                hideMouseReleased(evt);
+            }
+        });
+        jPanel3.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 294, -1, 30));
+
+        show.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/eye.png"))); // NOI18N
+        jPanel3.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 294, -1, 30));
+
+        ps.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        ps.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ps.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        ps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                psActionPerformed(evt);
+            }
+        });
+        jPanel3.add(ps, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 300, 50));
+
+        userId.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        userId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userId.setText("User ID:");
+        jPanel3.add(userId, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 60, 20));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 410, 480));
 
@@ -304,31 +376,47 @@ public class addUserForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addUserMouseClicked
 
     private void updateUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateUserMouseClicked
-       if(fn.getText().isEmpty() || ln.getText().isEmpty() || eml.getText().isEmpty() || un.getText().isEmpty() || ps.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-        }else if(ps.getText().length() < 8) {
-
-            JOptionPane.showMessageDialog(null, "Password too short. Please enter at least 8 characters above!");
-            ps.setText("");
-        }else if(duplicateCheck()){
-            System.out.println("Duplicate is exist");
-        }
-        else{
-        dbConnector dbc = new dbConnector();
-        dbc.updateData("UPDATE tbl_user SET u_fname = '"+fn.getText()+"', u_lname = '"+ln.getText()+"', u_email = '"+eml.getText()+"', u_username = '"+un.getText()+"', "
-                + "u_password = '"+ps.getText()+"', u_type = '"+ut.getSelectedItem()+"', "
-                        + " u_status = '"+us.getSelectedItem()+"' WHERE u_id = '"+uid.getText()+"' ");
-        }
-       
-       usersForm uf = new usersForm();
-            uf.setVisible(true);
-            this.dispose();
+    
     }//GEN-LAST:event_updateUserMouseClicked
 
     private void updateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserActionPerformed
-        // TODO add your handling code here:
+            if(fn.getText().isEmpty() || ln.getText().isEmpty() || eml.getText().isEmpty() || un.getText().isEmpty() || ps.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "All fields are required!");
+            }else if(ps.getText().length() < 8) {
+
+                JOptionPane.showMessageDialog(null, "Password too short. Please enter at least 8 characters above!");
+                ps.setText("");
+            }else if(updateCheck()){
+                System.out.println("Duplicate is exist");
+            }
+            else{
+
+            dbConnector dbc = new dbConnector();
+            dbc.updateData("UPDATE tbl_user SET u_fname = '"+fn.getText()+"', u_lname = '"+ln.getText()+"', u_email = '"+eml.getText()+"', u_username = '"+un.getText()+"', "
+                            + "u_password = '"+ps.getText()+"', u_type = '"+ut.getSelectedItem()+"', "
+                            + " u_status = '"+us.getSelectedItem()+"' WHERE u_id = '"+uid.getText()+"' ");
+            usersForm uf = new usersForm();
+            uf.setVisible(true);
+            this.dispose();
+            }
     }//GEN-LAST:event_updateUserActionPerformed
+
+    private void hideMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMouseReleased
+        show.setVisible(false);
+        hide.setVisible(true);
+        ps.setEchoChar('*');
+    }//GEN-LAST:event_hideMouseReleased
+
+    private void hideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMousePressed
+        show.setVisible(true);
+        hide.setVisible(false);
+        ps.setEchoChar((char) 0);
+    }//GEN-LAST:event_hideMousePressed
+
+    private void psActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_psActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,7 +457,7 @@ public class addUserForm extends javax.swing.JFrame {
     public javax.swing.JButton addUser;
     public javax.swing.JTextField eml;
     public javax.swing.JTextField fn;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel hide;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -379,10 +467,12 @@ public class addUserForm extends javax.swing.JFrame {
     private javax.swing.JLabel logoBack;
     private javax.swing.JLabel logofront;
     public javax.swing.JPasswordField ps;
+    private javax.swing.JLabel show;
     public javax.swing.JLabel uid;
     public javax.swing.JTextField un;
     public javax.swing.JButton updateUser;
     public javax.swing.JComboBox<String> us;
+    public javax.swing.JLabel userId;
     public javax.swing.JComboBox<String> ut;
     // End of variables declaration//GEN-END:variables
 }
