@@ -220,6 +220,8 @@ public class usersForm extends javax.swing.JFrame {
     private void add_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_buttonMouseClicked
         addUserForm auf = new addUserForm();
         auf.setVisible(true);
+        auf.remove.setEnabled(false);
+        auf.select.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_add_buttonMouseClicked
 
@@ -246,10 +248,23 @@ public class usersForm extends javax.swing.JFrame {
                 auf.ps.setText(""+rs.getString("u_password"));
                 auf.ut.setSelectedItem(""+rs.getString("u_type"));
                 auf.us.setSelectedItem(""+rs.getString("u_status"));
+                auf.image.setIcon(auf.ResizeImage(rs.getString("U_image"), null, auf.image));
+                auf.oldpath = rs.getString("u_image");
+                auf.path = rs.getString("u_image");
+                auf.destination = rs.getString("u_image");
                 auf.addUser.setEnabled(false);
                 auf.updateUser.setEnabled(true);
                 auf.setVisible(true);
-                this.dispose();
+                this.dispose();     
+                if(rs.getString("u_image").isEmpty()){
+                auf.select.setEnabled(true);
+                auf.remove.setEnabled(false);
+                
+                }else{
+                auf.select.setEnabled(false);
+                auf.remove.setEnabled(true);
+
+                }
                 
                } 
              
