@@ -23,7 +23,7 @@ public class dbConnector {
        // constructor to connect to our database
         public dbConnector(){
             try{
-                connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ace_db", "root", "");
+                connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/5-20-2025", "root", "");
             }catch(SQLException ex){
                     System.out.println("Can't connect to database: "+ex.getMessage());
             }

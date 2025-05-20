@@ -194,7 +194,7 @@ public class adminDashBoard extends javax.swing.JFrame {
                 jLabel2MouseClicked(evt);
             }
         });
-        LOGOUT.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 100, 30));
+        LOGOUT.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 100, 40));
 
         jPanel9.add(LOGOUT);
         LOGOUT.setBounds(590, 10, 100, 30);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2025 at 01:09 PM
+-- Generation Time: May 20, 2025 at 11:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,8 +18,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ace_db`
+-- Database: `5-20-2025`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_diagnose`
+--
+
+CREATE TABLE `tbl_diagnose` (
+  `d_id` int(10) NOT NULL,
+  `d_name` varchar(150) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -70,12 +83,17 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_username`, `u_password`, `u_type`, `u_status`, `u_image`) VALUES
-(14, 'Mark', 'Espinosa', 'Mark@gmail.com', 'Markkk', 'P5obUNBWNekysNBLyF0bPAeLHZMuLghqE3IKcVtb6Xs=', 'User', 'Active', 'src/userimages/m.png'),
-(15, 'AceWelman', 'Bacus', 'acey@gmail.com', 'Aceyyy', '6xygm9+W46/TkHBgktcjsaTTE/J3t2KT3RE4W1nGSa8=', 'Admin', 'Active', 'src/userimages/admin.png');
+(16, 'Aceyyy', 'Bacus', 'Aceyyy@gmail.com', 'Aceyyy', '6xygm9+W46/TkHBgktcjsaTTE/J3t2KT3RE4W1nGSa8=', 'Admin', 'Active', 'src/userimages/ad.png');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_diagnose`
+--
+ALTER TABLE `tbl_diagnose`
+  ADD PRIMARY KEY (`d_id`);
 
 --
 -- Indexes for table `tbl_patient`
@@ -94,6 +112,12 @@ ALTER TABLE `tbl_user`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_diagnose`
+--
+ALTER TABLE `tbl_diagnose`
+  MODIFY `d_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbl_patient`
 --
 ALTER TABLE `tbl_patient`
@@ -103,7 +127,7 @@ ALTER TABLE `tbl_patient`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `u_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `u_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
