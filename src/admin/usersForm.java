@@ -34,7 +34,7 @@ public class usersForm extends javax.swing.JFrame {
     public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT u_id, u_fname, u_lname, u_email, u_status FROM tbl_user");
+            ResultSet rs = dbc.getData("SELECT u_id, u_fname, u_lname, u_email, u_status, u_type FROM tbl_user");
             usersTable.setModel(DbUtils.resultSetToTableModel(rs));
              rs.close();
         }catch(SQLException ex){
@@ -59,14 +59,14 @@ public class usersForm extends javax.swing.JFrame {
 
         jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        acc_id = new javax.swing.JLabel();
         add_button = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         edit_button = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        acc_id = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
@@ -90,24 +90,10 @@ public class usersForm extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/icons8-users-100.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 110));
-
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("USERS");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 30));
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("CURRENT USER:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 150, 30));
-
-        acc_id.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_id.setText("ID: ");
-        jPanel1.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 150, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, 30));
 
         add_button.setBackground(new java.awt.Color(153, 153, 255));
         add_button.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -130,7 +116,7 @@ public class usersForm extends javax.swing.JFrame {
         add_button.add(jLabel6);
         jLabel6.setBounds(0, 14, 150, 20);
 
-        jPanel1.add(add_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 150, 50));
+        jPanel1.add(add_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 150, 50));
 
         edit_button.setBackground(new java.awt.Color(153, 153, 255));
         edit_button.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -153,9 +139,23 @@ public class usersForm extends javax.swing.JFrame {
         edit_button.add(jLabel7);
         jLabel7.setBounds(0, 14, 150, 20);
 
-        jPanel1.add(edit_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 150, 50));
+        jPanel1.add(edit_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 150, 50));
 
-        jPanel8.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 340));
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("CURRENT USER:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 30));
+
+        acc_id.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        acc_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_id.setText("ID: ");
+        jPanel1.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 150, 30));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/icons8-users-100.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 150, 110));
+
+        jPanel8.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 390));
 
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,9 +167,9 @@ public class usersForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(usersTable);
 
-        jPanel8.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 550, 340));
+        jPanel8.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 550, 390));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 700, 340));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 700, 390));
 
         jPanel9.setBackground(new java.awt.Color(0, 153, 204));
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -184,13 +184,13 @@ public class usersForm extends javax.swing.JFrame {
             }
         });
         jPanel9.add(jLabel1);
-        jLabel1.setBounds(630, 1, 70, 60);
+        jLabel1.setBounds(620, 0, 70, 60);
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("USERS FORM");
+        jLabel4.setText("USERS PAGE");
         jPanel9.add(jLabel4);
-        jLabel4.setBounds(0, 1, 150, 60);
+        jLabel4.setBounds(0, 0, 150, 60);
 
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 60));
 

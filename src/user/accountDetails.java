@@ -10,7 +10,6 @@ import config.Session;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import mainApp.loginForm;
-import mainApp.patientForm;
 
 /**
  *
@@ -191,13 +190,24 @@ public class accountDetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        Session ses = Session.getInstance();
-        
-       iddis.setText(""+ses.getUid());
-       fn.setText(""+ses.getFname());
-       ln.setText(""+ses.getLname());
-       eml.setText(""+ses.getEmail());
-       un.setText(""+ses.getUsername());
+       Session ses = Session.getInstance();
+       
+        if(ses.getUid() == 0){
+            JOptionPane.showMessageDialog(null, "No account, login first!");
+            iddis.setText(""+ses.getUid());
+            fn.setText(""+ses.getFname());
+            ln.setText(""+ses.getLname());
+            eml.setText(""+ses.getEmail());
+            un.setText(""+ses.getUsername());
+            loginForm lf = new loginForm();
+            lf.setVisible(true);
+            this.dispose(); 
+            
+        }else{
+             acc_fname.setText(""+ses.getFname());
+             acc_lname.setText(""+ses.getLname());
+        }
+       
        
        
     }//GEN-LAST:event_formWindowActivated

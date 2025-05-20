@@ -4,7 +4,6 @@ package mainApp;
 import user.userPage;
 import admin.adminDashBoard;
 import java.awt.Color;
-import internalPages.*;
 import javax.swing.JOptionPane;
 
 /*
@@ -54,6 +53,7 @@ public class dashBoard extends javax.swing.JFrame {
         header = new javax.swing.JPanel();
         minimize = new javax.swing.JLabel();
         close = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         maindesktop = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,7 +106,7 @@ public class dashBoard extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("USER PAGE");
+        jLabel2.setText("PATIENTS");
         userPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, 140, -1));
 
         navbar.add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 140, 40));
@@ -184,6 +184,11 @@ public class dashBoard extends javax.swing.JFrame {
         });
         header.add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 40, 40));
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("ADMIN");
+        header.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 40));
+
         main.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 690, 40));
 
         maindesktop.setBackground(new java.awt.Color(0, 153, 204));
@@ -252,8 +257,7 @@ public class dashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_reportsPanelMouseExited
 
     private void accountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMouseClicked
-        settings set = new settings();
-        maindesktop.add(set).setVisible(true);
+       
     }//GEN-LAST:event_accountMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
@@ -319,6 +323,7 @@ public class dashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel main;
     public javax.swing.JDesktopPane maindesktop;
     private javax.swing.JLabel minimize;

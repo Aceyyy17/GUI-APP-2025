@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2025 at 12:23 PM
+-- Generation Time: May 20, 2025 at 01:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,18 +61,17 @@ CREATE TABLE `tbl_user` (
   `u_username` varchar(50) NOT NULL,
   `u_password` varchar(50) NOT NULL,
   `u_type` varchar(50) NOT NULL,
-  `u_status` varchar(50) NOT NULL
+  `u_status` varchar(50) NOT NULL,
+  `u_image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_username`, `u_password`, `u_type`, `u_status`) VALUES
-(5, 'Ace Welman', 'Bacus', 'acearcilla@gmail.com', 'Acey17', '123', 'Admin', 'Active'),
-(8, 'Ace', 'Bacus', 'aceyyy@gmail.com', 'Acey', '12345', 'Admin', 'Inactive'),
-(10, 'Ace', 'welman', 'ace@gmail.com', 'Acewelman', '12345678', 'User', 'Active'),
-(12, 'Aceywelman', 'Bacus', 'aceybacus@gmail.com', 'Aceywelman', 'aceace', 'Admin', 'Active');
+INSERT INTO `tbl_user` (`u_id`, `u_fname`, `u_lname`, `u_email`, `u_username`, `u_password`, `u_type`, `u_status`, `u_image`) VALUES
+(14, 'Mark', 'Espinosa', 'Mark@gmail.com', 'Markkk', 'P5obUNBWNekysNBLyF0bPAeLHZMuLghqE3IKcVtb6Xs=', 'User', 'Active', 'src/userimages/m.png'),
+(15, 'AceWelman', 'Bacus', 'acey@gmail.com', 'Aceyyy', '6xygm9+W46/TkHBgktcjsaTTE/J3t2KT3RE4W1nGSa8=', 'Admin', 'Active', 'src/userimages/admin.png');
 
 --
 -- Indexes for dumped tables
@@ -104,7 +103,7 @@ ALTER TABLE `tbl_patient`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `u_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `u_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -342,10 +342,10 @@ public class loginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
-        int a = JOptionPane.showConfirmDialog(null, "Do you want to Exit?");
+       int a = JOptionPane.showConfirmDialog(null, "Do you want to Exit?");
         if (a == JOptionPane. YES_OPTION){
              System.exit(0);
-        } 
+        }
     }//GEN-LAST:event_exitMouseClicked
 
     private void hideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMousePressed

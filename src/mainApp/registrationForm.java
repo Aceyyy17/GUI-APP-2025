@@ -4,12 +4,24 @@ import config.dbConnector;
 import config.passwordHasher;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -32,6 +44,85 @@ public class registrationForm extends javax.swing.JFrame {
     public registrationForm() {
         initComponents();
     }
+    
+    public String destination = "";
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    
+    public int FileExistenceChecker(String path){
+      File file = new File(path);
+      String fileName = file.getName();
+      
+      Path filePath = Paths.get("src/userimages", fileName);
+      boolean fileExist = Files.exists(filePath);
+    
+      if(fileExist){
+      return 1;
+      }else {
+      return 0;
+      }
+    }
+    
+    public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+    
+    public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+    ImageIcon MyImage = null;
+        if(ImagePath !=null){
+            MyImage = new ImageIcon(ImagePath);
+        }else{
+            MyImage = new ImageIcon(pic);
+        }
+        
+    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+
+    Image img = MyImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon image = new ImageIcon(newImg);
+    return image;
+}
+    
+    public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   }
     
     public static String email, uname;
     
@@ -108,8 +199,10 @@ public class registrationForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        logoBack = new javax.swing.JLabel();
-        logofront = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
+        select = new javax.swing.JButton();
+        remove = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         un = new javax.swing.JTextField();
@@ -139,13 +232,39 @@ public class registrationForm extends javax.swing.JFrame {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        logoBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/logoback-Photoroom.png"))); // NOI18N
-        jPanel2.add(logoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 420));
+        jPanel4.setLayout(null);
+        jPanel4.add(image);
+        image.setBounds(10, 10, 220, 250);
 
-        logofront.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logofront.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/logo-Photoroom.png"))); // NOI18N
-        jPanel2.add(logofront, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 320, 240));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 240, 270));
+
+        select.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        select.setText("SELECT");
+        select.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectMouseClicked(evt);
+            }
+        });
+        select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectActionPerformed(evt);
+            }
+        });
+        jPanel2.add(select, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 100, 30));
+
+        remove.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        remove.setText("REMOVE");
+        remove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeMouseClicked(evt);
+            }
+        });
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+        jPanel2.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 100, 30));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainApp/gradient color.jpg"))); // NOI18N
@@ -388,13 +507,20 @@ public class registrationForm extends javax.swing.JFrame {
            try{
            String pass = passwordHasher.hashPassword(ps.getText());
            
-           if( dbc.insertData(" INSERT INTO tbl_user ( u_fname, u_lname, u_email, u_username, u_password, u_type, u_status) "
-                + "VALUES ('"+fn.getText()+"', '"+ln.getText()+"', '"+eml.getText()+"', '"+un.getText()+"', '"+pass+"', '"+ut.getSelectedItem()+"', 'Pending') "))
+           if( dbc.insertData("INSERT INTO tbl_user (u_fname, u_lname, u_email, u_username, u_password, u_type, u_status, u_image) "
+    + "VALUES ('"+fn.getText()+"', '"+ln.getText()+"', '"+eml.getText()+"', '"+un.getText()+"', '"+pass+"', '"+ut.getSelectedItem()+"', 'Pending', '"+destination+"')"))
+
          {
-            JOptionPane.showMessageDialog(null, "Inserted Successfully!");
+           try{
+             Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+             JOptionPane.showMessageDialog(null, "Inserted Successfully!");
             loginForm lf = new loginForm();
             lf.setVisible(true);
             this.dispose();
+           }catch(IOException ex){
+                System.out.println("Insert Image Error: "+ ex);
+            }
+           
         } else{
           JOptionPane.showMessageDialog(null, "Connection Failed!");
         }  
@@ -423,6 +549,47 @@ public class registrationForm extends javax.swing.JFrame {
        hide.setVisible(true);
        ps.setEchoChar('*');
     }//GEN-LAST:event_hideMouseReleased
+
+    private void selectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectMouseClicked
+
+    private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if(returnValue == JFileChooser.APPROVE_OPTION){
+            try{
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/userimages/" + selectedFile.getName();
+                path = selectedFile.getAbsolutePath();
+
+                if(FileExistenceChecker(path) == 1 ){
+                    JOptionPane.showConfirmDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path= "";
+                }else{
+                    image.setIcon(ResizeImage(path, null, image));
+                    select.setEnabled(false);
+                    remove.setEnabled(true);
+
+                }
+            }catch (Exception ex){
+                System.out.println("File Error!");
+            }
+        }
+    }//GEN-LAST:event_selectActionPerformed
+
+    private void removeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeMouseClicked
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        remove.setEnabled(false);
+        select.setEnabled(true);
+        image.setIcon(null);
+        destination ="";
+        path = "";
+    }//GEN-LAST:event_removeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,7 +633,8 @@ public class registrationForm extends javax.swing.JFrame {
     private javax.swing.JTextField eml;
     private javax.swing.JTextField fn;
     private javax.swing.JLabel hide;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel image;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -474,12 +642,13 @@ public class registrationForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField ln;
-    private javax.swing.JLabel logoBack;
-    private javax.swing.JLabel logofront;
     private javax.swing.JLabel minimize;
     private javax.swing.JPasswordField ps;
     private javax.swing.JPanel register;
+    public javax.swing.JButton remove;
+    public javax.swing.JButton select;
     private javax.swing.JLabel show;
     private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> ut;

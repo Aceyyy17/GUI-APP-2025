@@ -40,9 +40,6 @@ public class userDashBoard extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        reports = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
         managePatient = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -72,30 +69,6 @@ public class userDashBoard extends javax.swing.JFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        reports.setBackground(new java.awt.Color(255, 102, 0));
-        reports.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        reports.setPreferredSize(new java.awt.Dimension(160, 160));
-        reports.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                reportsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                reportsMouseExited(evt);
-            }
-        });
-        reports.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC11\\Pictures\\reports.png")); // NOI18N
-        reports.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 100));
-
-        jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("REPORTS");
-        reports.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
-
-        jPanel8.add(reports, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 140, 140));
-
         managePatient.setBackground(new java.awt.Color(255, 102, 0));
         managePatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         managePatient.setPreferredSize(new java.awt.Dimension(160, 160));
@@ -121,7 +94,7 @@ public class userDashBoard extends javax.swing.JFrame {
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/internalPages/manage-user.png"))); // NOI18N
         managePatient.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 90));
 
-        jPanel8.add(managePatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 140, 140));
+        jPanel8.add(managePatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 140, 140));
 
         settting.setBackground(new java.awt.Color(255, 102, 0));
         settting.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -147,7 +120,7 @@ public class userDashBoard extends javax.swing.JFrame {
         jLabel18.setText("SETTINGS");
         settting.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
 
-        jPanel8.add(settting, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 140, 140));
+        jPanel8.add(settting, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 140, 140));
 
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 700, 240));
 
@@ -192,6 +165,11 @@ public class userDashBoard extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("LOG OUT");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         LOGOUT.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 100, 30));
 
         jPanel9.add(LOGOUT);
@@ -213,14 +191,6 @@ public class userDashBoard extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void reportsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseEntered
-        reports.setBackground(navColor);
-    }//GEN-LAST:event_reportsMouseEntered
-
-    private void reportsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseExited
-        reports.setBackground(headerColor);
-    }//GEN-LAST:event_reportsMouseExited
 
     private void managePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePatientMouseClicked
        patientForm pf = new patientForm();
@@ -269,6 +239,13 @@ public class userDashBoard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+
+        loginForm lf = new loginForm();
+        lf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -311,18 +288,15 @@ public class userDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel managePatient;
-    private javax.swing.JPanel reports;
     private javax.swing.JPanel settting;
     // End of variables declaration//GEN-END:variables
 }

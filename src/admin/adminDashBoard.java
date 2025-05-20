@@ -45,7 +45,7 @@ public class adminDashBoard extends javax.swing.JFrame {
         manageUser = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        settting = new javax.swing.JPanel();
+        setttings = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
@@ -84,7 +84,6 @@ public class adminDashBoard extends javax.swing.JFrame {
         reports.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC11\\Pictures\\reports.png")); // NOI18N
         reports.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 100));
 
         jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -121,31 +120,31 @@ public class adminDashBoard extends javax.swing.JFrame {
 
         jPanel8.add(manageUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 140, 140));
 
-        settting.setBackground(new java.awt.Color(255, 102, 0));
-        settting.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        settting.addMouseListener(new java.awt.event.MouseAdapter() {
+        setttings.setBackground(new java.awt.Color(255, 102, 0));
+        setttings.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        setttings.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                setttingMouseClicked(evt);
+                setttingsMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                setttingMouseEntered(evt);
+                setttingsMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                setttingMouseExited(evt);
+                setttingsMouseExited(evt);
             }
         });
-        settting.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setttings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/setting.png"))); // NOI18N
-        settting.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, -1));
+        setttings.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, -1));
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("SETTINGS");
-        settting.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
+        setttings.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 140, 20));
 
-        jPanel8.add(settting, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 140, 140));
+        jPanel8.add(setttings, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 140, 140));
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 700, 240));
 
@@ -189,7 +188,12 @@ public class adminDashBoard extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("LOG OUT");
+        jLabel2.setText("BACK");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         LOGOUT.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 0, 100, 30));
 
         jPanel9.add(LOGOUT);
@@ -217,19 +221,17 @@ public class adminDashBoard extends javax.swing.JFrame {
         manageUser.setBackground(headerColor);
     }//GEN-LAST:event_manageUserMouseExited
 
-    private void setttingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseEntered
-        settting.setBackground(navColor);
-    }//GEN-LAST:event_setttingMouseEntered
+    private void setttingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingsMouseEntered
+        setttings.setBackground(navColor);
+    }//GEN-LAST:event_setttingsMouseEntered
 
-    private void setttingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseExited
-         settting.setBackground(headerColor);
-    }//GEN-LAST:event_setttingMouseExited
+    private void setttingsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingsMouseExited
+         setttings.setBackground(headerColor);
+    }//GEN-LAST:event_setttingsMouseExited
 
-    private void setttingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingMouseClicked
-        dashBoard dash = new dashBoard();   
-        dash.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_setttingMouseClicked
+    private void setttingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setttingsMouseClicked
+        
+    }//GEN-LAST:event_setttingsMouseClicked
 
     private void manageUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUserMouseClicked
        usersForm uf = new usersForm();
@@ -242,7 +244,7 @@ public class adminDashBoard extends javax.swing.JFrame {
         if(ses.getUid() == 0){
             JOptionPane.showMessageDialog(null, "No account, login first!");
             loginForm lf = new loginForm();
-            lf.setVisible(true);
+            lf.setVisible(true); 
             this.dispose(); 
         }else{
              acc_name.setText(""+ses.getFname());
@@ -254,10 +256,16 @@ public class adminDashBoard extends javax.swing.JFrame {
 
     private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
 
-        loginForm lf = new loginForm();
-        lf.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_LOGOUTMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+       
+        dashBoard dash = new dashBoard();   
+        dash.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -312,6 +320,6 @@ public class adminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel manageUser;
     private javax.swing.JPanel reports;
-    private javax.swing.JPanel settting;
+    private javax.swing.JPanel setttings;
     // End of variables declaration//GEN-END:variables
 }
